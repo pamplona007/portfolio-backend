@@ -1,34 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
+import 'dotenv/config';
+import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pg from 'pg';
 
-// In-memory data stores
-const users = [];
-const education = [];
-const experiences = [];
-const skills = [];
-const projects = [];
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
-export function generateId() {
-  return uuidv4();
-}
+export { prisma };
 
-export function now() {
-  return new Date().toISOString();
-}
-
-export function resetData() {
-  users.length = 0;
-  education.length = 0;
-  experiences.length = 0;
-  skills.length = 0;
-  projects.length = 0;
-}
-
-export const db = {
-  users,
-  education,
-  experiences,
-  skills,
-  projects,
-};
-
-export default db;
+export default prisma;

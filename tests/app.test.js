@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest';
+import { prisma } from '../src/data/store.js';
 
 let server;
 let baseUrl;
@@ -12,12 +13,16 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  const { resetData } = await import('../src/data/store.js');
-  resetData();
+  await prisma.education.deleteMany();
+  await prisma.experience.deleteMany();
+  await prisma.skill.deleteMany();
+  await prisma.project.deleteMany();
+  await prisma.user.deleteMany();
 });
 
-afterAll(() => {
+afterAll(async () => {
   server.close();
+  await prisma.$disconnect();
 });
 
 const request = async (method, path, body, token) => {
