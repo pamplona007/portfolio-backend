@@ -56,10 +56,23 @@ This synchronises your Prisma schema with the database (creates/updates tables).
 ### 5. (Optional) Seed the database
 
 ```bash
-npm run db:seed
+npm run seed
 ```
 
-This populates the database with demo data.
+This populates the database with demo data for local development:
+
+```
+Demo credentials:
+  Email:    demo@portfolio.com
+  Password: demo123
+
+Seeded data:
+  - 1 user
+  - 2 education entries
+  - 2 experience entries
+  - 5 skills (React, TypeScript, Node.js, PostgreSQL, Docker)
+  - 2 projects (Portfolio Pessoal, TaskBoard)
+```
 
 ### 6. Start the server
 
@@ -103,6 +116,6 @@ npm test
 
 ```bash
 npm run db:push   # Push schema to database
-npm run db:seed   # Seed database with demo data
+npm run seed      # Seed database with demo data
 npx prisma studio # Open Prisma Studio (visual database editor)
 ```
